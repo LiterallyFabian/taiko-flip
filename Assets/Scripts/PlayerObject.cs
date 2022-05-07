@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +12,9 @@ namespace TaikoFlip
         
         [SerializeField] private Transform _noteContainer;
         [SerializeField] private GameObject _notePrefab;
+        [SerializeField] private Image _power;
+        [SerializeField] private Text _scoreText;
+        [SerializeField] private Text _comboText;
         private readonly Vector3 _spawnPosition = new Vector3(2000, 0, 0);
 
         [Header("1-2p config")]
@@ -27,11 +27,19 @@ namespace TaikoFlip
         [SerializeField] private KeyCode _centre;
         [SerializeField] private KeyCode _rim;
 
+        
+        private int _score;
+        private int _combo;
+        private int _hits;
+        private TaikoBeatmap _beatmap;
+        private int _hitsToFlipTheSwitch => (int)(_beatmap.Objects.Count * 0.8);
+        
+
         public void StartBeatmap(TaikoBeatmap beatmap)
         {
+            _beatmap = beatmap;
             foreach (TaikoObject note in beatmap.Objects)
-            {            
-
+            {
                 StartCoroutine(QueueNote((TaikoNote)note));
             }
         }
@@ -66,6 +74,10 @@ namespace TaikoFlip
                 _drum.RimL.enabled = Input.GetKey(_rimLeft);
                 _drum.RimR.enabled = Input.GetKey(_rimRight);
             }
+            
+            _power.fillAmount = Mathf.Clamp((float)_hits / _hitsToFlipTheSwitch, 0, 1);
+            _scoreText.text = _score.ToString();
+            _comboText.text = _combo.ToString();
         }
 
         /// <summary>
@@ -81,22 +93,28 @@ namespace TaikoFlip
             {
                 if (closestNote.Note.Type == NoteType.Don)
                 {
-                    closestNote.Hit();
+                    _score += closestNote.Hit() + _combo / 10;
+                    _combo++;
+                    _hits++;
                 }
                 else
                 {
                     closestNote.Miss();
+                    _combo = 0;
                 }
             }
             else
             {
                 if (closestNote.Note.Type == NoteType.Ka)
                 {
-                    closestNote.Hit();
+                    _score += closestNote.Hit() + _combo / 10;
+                    _combo++;
+                    _hits++;
                 }
                 else
                 {
                     closestNote.Miss();
+                    _combo = 0;
                 }
             }
         }

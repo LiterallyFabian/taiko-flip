@@ -46,23 +46,21 @@ public class NoteObject : MonoBehaviour
         };
     }
 
-    public void Hit()
+    public int Hit()
     {
         float distance = Mathf.Abs(transform.position.x);
-        int score = distance > 50 ? 150 : 300;
-        
         foreach(HitSound hs in Note.HitSounds)
         {
             AudioSource.PlayClipAtPoint(_hitSounds[(int)hs], Camera.main!.transform.position);
         }
         
-        print("hit");
         Destroy(gameObject);
+        
+        return distance > 50 ? 150 : 300;
     }
     
     public void Miss()
     {
-        print("miss");
         Destroy(gameObject);
     }
 }
