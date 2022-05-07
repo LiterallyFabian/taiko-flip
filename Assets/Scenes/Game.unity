@@ -286,6 +286,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919711260}
     m_Modifications:
+    - target: {fileID: 413191531, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Text
+      value: PLAYER 4 FLIPPED THE SWITCH!
+      objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _rim
       value: 93
@@ -510,6 +514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919711260}
     m_Modifications:
+    - target: {fileID: 413191531, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Text
+      value: PLAYER 2 FLIPPED THE SWITCH!
+      objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _rim
       value: 103
@@ -706,7 +714,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.648
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -960,6 +968,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919711260}
     m_Modifications:
+    - target: {fileID: 413191531, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Text
+      value: PLAYER 3 FLIPPED THE SWITCH!
+      objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _rim
       value: 107
