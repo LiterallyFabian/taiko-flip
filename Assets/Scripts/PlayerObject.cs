@@ -74,7 +74,7 @@ namespace TaikoFlip
         /// <param name="centre">True if this is a center hit, false if rim.</param>
         private void Slam(bool centre)
         {
-            NoteObject closestNote = GetClosestNote();
+            NoteObject closestNote = GetLastNote();
             if (closestNote == null) return;
 
             if (centre)
@@ -101,22 +101,22 @@ namespace TaikoFlip
             }
         }
 
-        private NoteObject GetClosestNote()
+        private NoteObject GetLastNote()
         {
-            // get note closest to x localPosition -1050
-            NoteObject closestNote = null;
-            float closestDistance = float.MaxValue;
-            foreach (NoteObject note in _noteContainer.GetComponentsInChildren<NoteObject>())
+            // Get the note with the lowest local position X
+            NoteObject lastNote = null;
+            float lastDistance = float.MaxValue;
+            foreach (NoteObject note in FindObjectsOfType<NoteObject>())
             {
-                float distance = Mathf.Abs(note.transform.localPosition.x + 1050);
-                if (distance < closestDistance)
+                float distance = note.transform.localPosition.x;
+                if (distance < lastDistance)
                 {
-                    closestNote = note;
-                    closestDistance = distance;
+                    lastNote = note;
+                    lastDistance = distance;
                 }
             }
-
-            return closestDistance < 110 ? closestNote : null;
+            
+            return lastDistance < -900 ? lastNote : null;
         }
     
 
