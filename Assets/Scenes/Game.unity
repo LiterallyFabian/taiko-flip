@@ -868,6 +868,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaikoPlayer 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1817485091669517264, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 089d1c42dd044a74d83def5d4dfe3ec2, type: 3}
+    - target: {fileID: 1817485091669517264, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817485091669517264, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817485091669517264, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1817485091669517265, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
