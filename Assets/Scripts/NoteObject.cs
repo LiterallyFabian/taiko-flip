@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NoteObject : MonoBehaviour
 {
-    private TaikoNote _note;
+    public TaikoNote Note { get; private set; }
     [SerializeField] private Image _background;
     public Color DonColor;
     public Color KaColor;
@@ -13,45 +13,56 @@ public class NoteObject : MonoBehaviour
     public static float TimeToReachHit => 3000 / Speed;
     [SerializeField] private AudioClip[] _hitSounds;
     private Transform _transform;
-
-    private float a;
-
+    private CanvasGroup _canvasGroup;
+    
     private void Awake()
     {
         _transform = transform;
-        a = Time.time;
+        _canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private void Update()
     {
-        if (_note == null) return;
+        if (Note == null) return;
         
         // change x position
         Vector3 localPosition = _transform.localPosition;
         float newX = localPosition.x + Time.deltaTime * -Speed;
         localPosition = new Vector3(newX, localPosition.y, localPosition.z);
         _transform.localPosition = localPosition;
-
-
-        if (_transform.localPosition.x < -1000)
-        {
-            print(Time.time - a);
-            foreach(HitSound hs in _note.HitSounds)
-            {
-                AudioSource.PlayClipAtPoint(_hitSounds[(int)hs], Camera.main!.transform.position);
-            }
-            Destroy(gameObject);
-        }
+        
+        if(localPosition.x < -1150) 
+            Miss();
     }
 
     public void SetNote(TaikoNote newNote)
     {
-        _note = newNote;
-        _background.color = _note.Type switch
+        Note = newNote;
+        _background.color = Note.Type switch
         {
             NoteType.Don => DonColor,
             NoteType.Ka => KaColor,
             _ => _background.color,
         };
+    }
+
+    public void Hit()
+    {
+        float distance = Mathf.Abs(transform.position.x);
+        int score = distance > 50 ? 150 : 300;
+        
+        foreach(HitSound hs in Note.HitSounds)
+        {
+            AudioSource.PlayClipAtPoint(_hitSounds[(int)hs], Camera.main!.transform.position);
+        }
+        
+        print("hit");
+        Destroy(gameObject);
+    }
+    
+    public void Miss()
+    {
+        print("miss");
+        Destroy(gameObject);
     }
 }

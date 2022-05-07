@@ -389,6 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4253c7eb1741e39db2fca1a4f36dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitCenter: {fileID: 0}
+  _hitRim: {fileID: 0}
   _noteContainer: {fileID: 1909020059}
   _notePrefab: {fileID: 83919980903827932, guid: d1d7170a5f9fcf446aadeca74475332e, type: 3}
   _centreLeft: 120

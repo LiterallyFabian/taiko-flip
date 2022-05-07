@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 83919980903827933}
   - component: {fileID: 7816893067446427316}
+  - component: {fileID: 3437295265289987447}
   m_Layer: 5
   m_Name: TaikoNote
   m_TagString: Untagged
@@ -58,6 +59,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cefe1cb05c414cb48be406e9da386046, type: 3}
   - {fileID: 8300000, guid: 1f7892b240783a341851d8c06dae2d77, type: 3}
   - {fileID: 8300000, guid: 74eb0c811201d2249b0462067b7622ea, type: 3}
+--- !u!225 &3437295265289987447
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83919980903827932}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &83919981448744454
 GameObject:
   m_ObjectHideFlags: 0

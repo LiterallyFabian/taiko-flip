@@ -10,7 +10,7 @@ namespace TaikoFlip
         [SerializeField] private Image _background;
         [SerializeField] private AudioSource _music;
         public TaikoBeatmap Beatmap;
-        
+        public int PlayerCount { get; private set; }
         public static GameManager Instance { get; private set; }
 
         private void Awake()
