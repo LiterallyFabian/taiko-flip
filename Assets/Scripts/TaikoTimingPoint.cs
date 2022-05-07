@@ -21,7 +21,6 @@ namespace TaikoFlip
 
         public TaikoTimingPoint(string line)
         {
-            Debug.Log(line);
             string[] parts = line.Split(',');
             
             Time = int.Parse(parts[0]);

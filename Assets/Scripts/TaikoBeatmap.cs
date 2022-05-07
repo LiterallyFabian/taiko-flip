@@ -8,27 +8,27 @@ namespace TaikoFlip
     public class TaikoBeatmap
     {
         public static NumberFormatInfo NumberFormatInfo;
-        public AudioClip Music { get; }
-        
+        public AudioClip Music { get; private set; }
+
         public Sprite Background { get; private set; }
-        
+
         public List<TaikoTimingPoint> TimingPoints { get; } = new List<TaikoTimingPoint>();
 
         public List<TaikoObject> Objects { get; } = new List<TaikoObject>();
-        
-        public SampleSet SampleSet { get; }
-        
+
+        public SampleSet SampleSet { get; private set; }
+
         /// <summary>
         /// Milliseconds of silence before the audio starts playing
         /// </summary>
-        public float AudioLeadIn { get; }
-        
-        public string Title { get; }
-        public string Artist { get; }
-        public string Creator { get; }
-        public string Version { get; }
-        public string Source { get; }
-        public string Tags { get; }
+        public float AudioLeadIn { get; private set; }
+
+        public string Title { get; private set; }
+        public string Artist { get; private set; }
+        public string Creator { get; private set; }
+        public string Version { get; private set; }
+        public string Source { get; private set; }
+        public string Tags { get; private set; }
 
         static TaikoBeatmap()
         {
@@ -39,9 +39,20 @@ namespace TaikoFlip
             };
         }
 
-        public TaikoBeatmap(TextAsset beatmap)
+        private TaikoBeatmap() {}
+
+        
+        public static TaikoBeatmap Parse(string path)
         {
-            string[] lines = beatmap.text.Split('\n');
+            TextAsset textAsset = Resources.Load<TextAsset>(path);
+            if (textAsset == null)
+                throw new Exception($"Beatmap file not found: {path}");
+            
+            TaikoBeatmap beatmap = new TaikoBeatmap();
+            string[] lines = textAsset.text.Split('\n');
+            string dirPath = path.Substring(0, path.LastIndexOf('\\') + 1);
+            
+            
             BeatmapSection currentSection = BeatmapSection.None;
             foreach (string line in lines)
             {
@@ -67,12 +78,15 @@ namespace TaikoFlip
                 switch (currentSection)
                 {
                     case BeatmapSection.General when line.StartsWith("AudioFilename"):
-                        Music = Resources.Load<AudioClip>(line
-                            .Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim().Replace(".mp3", ""));
+                        // file name without extension and \r
+                        string fileName = line.Substring(line.IndexOf(':') + 1).Replace(".mp3\r", "").Trim();
+                        Debug.Log(dirPath+ fileName);
+                        beatmap.Music = Resources.Load<AudioClip>(dirPath + fileName);
                         break;
                     case BeatmapSection.General when line.StartsWith("AudioLeadIn"):
-                        AudioLeadIn =
-                            float.Parse(line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim(), NumberFormatInfo);
+                        beatmap.AudioLeadIn =
+                            float.Parse(line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim(),
+                                NumberFormatInfo);
                         break;
                     case BeatmapSection.General:
                     {
@@ -80,56 +94,51 @@ namespace TaikoFlip
                         {
                             string set = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
 
-                            SampleSet = (SampleSet) Enum.Parse(typeof(SampleSet), set);
+                            beatmap.SampleSet = (SampleSet) Enum.Parse(typeof(SampleSet), set);
                         }
 
                         break;
                     }
                     case BeatmapSection.Metadata when line.StartsWith("Title"):
-                        Title = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        beatmap.Title = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Artist"):
-                        Artist = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        beatmap.Artist = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Creator"):
-                        Creator = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        beatmap.Creator = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Version"):
-                        Version = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        beatmap.Version = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Source"):
-                        Source = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        beatmap.Source = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
-                    case BeatmapSection.Metadata:
-                    {
-                        if (line.StartsWith("Tags"))
-                        {
-                            Tags = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
-                        }
-
+                    case BeatmapSection.Metadata when line.StartsWith("Tags"):
+                        beatmap.Tags = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
-                    }
                     case BeatmapSection.TimingPoints:
-                        if(line.Length >5)
-                            TimingPoints.Add(new TaikoTimingPoint(line));
+                        if (line.Length > 5)
+                            beatmap.TimingPoints.Add(new TaikoTimingPoint(line));
                         break;
+                    
                     case BeatmapSection.HitObjects:
                     {
                         if (line.Length == 0)
                             continue;
-                        
+
                         int type = int.Parse(line.Split(',')[3]);
 
                         switch (type)
                         {
                             case 1:
-                                Objects.Add(new TaikoNote(line));
+                                beatmap.Objects.Add(new TaikoNote(line));
                                 break;
                             case 6:
-                                //Objects.Add(new TaikoSlider(line));
+                                //map.Objects.Add(new TaikoSlider(line));
                                 break;
                             case 12:
-                                //Objects.Add(new TaikoSpinner(line));
+                                //map.Objects.Add(new TaikoSpinner(line));
                                 break;
                         }
 
@@ -137,6 +146,8 @@ namespace TaikoFlip
                     }
                 }
             }
+            
+            return beatmap;
         }
     }
 

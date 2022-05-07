@@ -5,12 +5,11 @@ namespace TaikoFlip
 {
     public class test : MonoBehaviour
     {
-        public TextAsset textAsset;
         TaikoBeatmap beatmap;
 
         private void Start()
         {
-            beatmap = new TaikoBeatmap(textAsset);
+            beatmap = TaikoBeatmap.Parse("Beatmaps\\571171 Sayuri - Heikousen\\Sayuri - Heikousen (Charlotte) [Futsuu]");
             
             print(beatmap);
         }
