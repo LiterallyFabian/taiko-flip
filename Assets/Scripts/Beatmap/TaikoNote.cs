@@ -5,7 +5,7 @@ namespace TaikoFlip
     public class TaikoNote : TaikoObject
     {
         public NoteType Type { get; } = NoteType.Don;
-        private bool IsBig { get; } 
+        public bool IsBig { get; } 
         public List<HitSound> HitSounds { get; } 
         
         public TaikoNote(string line)
@@ -36,7 +36,7 @@ namespace TaikoFlip
             
             if (HitSounds.Contains(HitSound.Whistle) || HitSounds.Contains(HitSound.Clap))
             {
-                Type = NoteType.Kat;
+                Type = NoteType.Ka;
             }
 
             IsBig = HitSounds.Contains(HitSound.Finish);
@@ -53,7 +53,7 @@ namespace TaikoFlip
         /// <summary>
         /// A.k.a. "Blue"
         /// </summary>
-        Kat,
+        Ka,
     }
 
     public enum HitSound

@@ -7,7 +7,7 @@ namespace TaikoFlip
     {
         [SerializeField] private Transform _noteContainer;
         [SerializeField] private GameObject _notePrefab;
-
+        
         private void Start()
         {
             SpawnNote();
