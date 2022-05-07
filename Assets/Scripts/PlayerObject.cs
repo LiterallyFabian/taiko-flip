@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace TaikoFlip
@@ -11,7 +9,15 @@ namespace TaikoFlip
         [SerializeField] private GameObject _notePrefab;
         private readonly Vector3 _spawnPosition = new Vector3(2000, 0, 0);
 
+        [Header("1-2p config")]
+        [SerializeField] private KeyCode _centreLeft;
+        [SerializeField] private KeyCode _centreRight;
+        [SerializeField] private KeyCode _rimLeft;
+        [SerializeField] private KeyCode _rimRight;
         
+        [Header("3-4p config")]
+        [SerializeField] private KeyCode _centre;
+        [SerializeField] private KeyCode _rim;
 
         public void StartBeatmap(TaikoBeatmap beatmap)
         {
