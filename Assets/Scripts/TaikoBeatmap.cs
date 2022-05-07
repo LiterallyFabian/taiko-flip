@@ -1,32 +1,43 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace TaikoFlip
 {
     public class TaikoBeatmap
     {
-        public AudioClip Music { get; private set; }
+        public static NumberFormatInfo NumberFormatInfo;
+        public AudioClip Music { get; }
         
         public Sprite Background { get; private set; }
         
-        public List<TaikoTimingPoint> TimingPoints { get; private set; }
+        public List<TaikoTimingPoint> TimingPoints { get; } = new List<TaikoTimingPoint>();
 
-        public List<TaikoObject> Objects { get; private set; }
+        public List<TaikoObject> Objects { get; } = new List<TaikoObject>();
         
-        public SampleSet SampleSet { get; private set; }
+        public SampleSet SampleSet { get; }
         
         /// <summary>
         /// Milliseconds of silence before the audio starts playing
         /// </summary>
-        public float AudioLeadIn { get; private set; }
+        public float AudioLeadIn { get; }
         
-        public string Title { get; private set; }
-        public string Artist { get; private set; }
-        public string Creator { get; private set; }
-        public string Version { get; private set; }
-        public string Source { get; private set; }
-        public string Tags { get; private set; }
+        public string Title { get; }
+        public string Artist { get; }
+        public string Creator { get; }
+        public string Version { get; }
+        public string Source { get; }
+        public string Tags { get; }
+
+        static TaikoBeatmap()
+        {
+            NumberFormatInfo = new NumberFormatInfo
+            {
+                NegativeSign = "-",
+                NumberDecimalSeparator = ".",
+            };
+        }
 
         public TaikoBeatmap(TextAsset beatmap)
         {
@@ -36,17 +47,20 @@ namespace TaikoFlip
             {
                 switch (line)
                 {
-                    case "[General]":
+                    case "[General]\r":
                         currentSection = BeatmapSection.General;
                         continue;
-                    case "[Metadata]":
+                    case "[Metadata]\r":
                         currentSection = BeatmapSection.Metadata;
                         continue;
-                    case "[TimingPoints]":
+                    case "[TimingPoints]\r":
                         currentSection = BeatmapSection.TimingPoints;
                         continue;
-                    case "[HitObjects]":
+                    case "[HitObjects]\r":
                         currentSection = BeatmapSection.HitObjects;
+                        continue;
+                    case "[Colours]\r":
+                        currentSection = BeatmapSection.Colours;
                         continue;
                 }
 
@@ -58,7 +72,7 @@ namespace TaikoFlip
                         break;
                     case BeatmapSection.General when line.StartsWith("AudioLeadIn"):
                         AudioLeadIn =
-                            float.Parse(line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim());
+                            float.Parse(line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim(), NumberFormatInfo);
                         break;
                     case BeatmapSection.General:
                     {
@@ -96,10 +110,14 @@ namespace TaikoFlip
                         break;
                     }
                     case BeatmapSection.TimingPoints:
-                        TimingPoints.Add(new TaikoTimingPoint(line));
+                        if(line.Length >5)
+                            TimingPoints.Add(new TaikoTimingPoint(line));
                         break;
                     case BeatmapSection.HitObjects:
                     {
+                        if (line.Length == 0)
+                            continue;
+                        
                         int type = int.Parse(line.Split(',')[3]);
 
                         switch (type)
@@ -139,6 +157,7 @@ namespace TaikoFlip
         Difficulty,
         Events,
         TimingPoints,
+        Colours,
         HitObjects,
     }
 }

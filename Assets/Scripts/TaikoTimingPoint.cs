@@ -1,4 +1,7 @@
-﻿namespace TaikoFlip
+﻿using System.Globalization;
+using UnityEngine;
+
+namespace TaikoFlip
 {
     public class TaikoTimingPoint
     {
@@ -18,9 +21,11 @@
 
         public TaikoTimingPoint(string line)
         {
+            Debug.Log(line);
             string[] parts = line.Split(',');
+            
             Time = int.Parse(parts[0]);
-            BeatLength = float.Parse(parts[1]);
+            BeatLength = float.Parse(parts[1], TaikoBeatmap.NumberFormatInfo);
             Meter = int.Parse(parts[2]);
             SampleSet = (SampleSet)int.Parse(parts[3]);
             Volume = int.Parse(parts[4]);
