@@ -9,7 +9,7 @@ namespace TaikoFlip
 {
     public class PlayerObject : MonoBehaviour
     {
-
+        [SerializeField] private DrumObject _drum;
         [SerializeField] private AudioClip _hitCenter;
         [SerializeField] private AudioClip _hitRim;
         
@@ -60,6 +60,11 @@ namespace TaikoFlip
                     AudioSource.PlayClipAtPoint(_hitRim, Vector3.zero);
                     Slam(false);
                 }
+
+                _drum.CentreL.enabled = Input.GetKey(_centreLeft);
+                _drum.CentreR.enabled = Input.GetKey(_centreRight);
+                _drum.RimL.enabled = Input.GetKey(_rimLeft);
+                _drum.RimR.enabled = Input.GetKey(_rimRight);
             }
         }
 
