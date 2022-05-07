@@ -39,7 +39,7 @@ namespace TaikoFlip
         [SerializeField] private Text _comboText;
         
         private int _score;
-        private int _combo;
+        public int Combo;
         private int _hits;
         private TaikoBeatmap _beatmap;
         private int _hitsToFlipTheSwitch => _beatmap == null ? 10000 : (int)(_beatmap.Objects.Count * 0.8);
@@ -88,10 +88,29 @@ namespace TaikoFlip
                 _drum.RimL.enabled = Input.GetKey(_rimLeft);
                 _drum.RimR.enabled = Input.GetKey(_rimRight);
             }
+            else
+            {
+                if (Input.GetKeyDown(_centre))
+                {
+                    AudioSource.PlayClipAtPoint(_hitCenter, Vector3.zero);
+                    Slam(true);
+                }
+
+                if (Input.GetKeyDown(_rim))
+                {
+                    AudioSource.PlayClipAtPoint(_hitRim, Vector3.zero);
+                    Slam(false);
+                }
+                
+                _drum.CentreL.enabled = Input.GetKey(_centre);
+                _drum.CentreR.enabled = Input.GetKey(_centre);
+                _drum.RimL.enabled = Input.GetKey(_rim);
+                _drum.RimR.enabled = Input.GetKey(_rim);
+            }
 
             _power.fillAmount = Mathf.Clamp((float) _hits / _hitsToFlipTheSwitch, 0, 1);
             _scoreText.text = _score.ToString();
-            _comboText.text = _combo.ToString();
+            _comboText.text = Combo.ToString();
 
             if (!_switchFlipped && _hits >= _hitsToFlipTheSwitch)
             {
@@ -116,28 +135,28 @@ namespace TaikoFlip
             {
                 if (closestNote.Note.Type == NoteType.Don)
                 {
-                    _score += closestNote.Hit() + _combo / 10;
-                    _combo++;
+                    _score += closestNote.Hit() + Combo / 10;
+                    Combo++;
                     _hits++;
                 }
                 else
                 {
                     closestNote.Miss();
-                    _combo = 0;
+                    Combo = 0;
                 }
             }
             else
             {
                 if (closestNote.Note.Type == NoteType.Ka)
                 {
-                    _score += closestNote.Hit() + _combo / 10;
-                    _combo++;
+                    _score += closestNote.Hit() + Combo / 10;
+                    Combo++;
                     _hits++;
                 }
                 else
                 {
                     closestNote.Miss();
-                    _combo = 0;
+                    Combo = 0;
                 }
             }
         }
@@ -171,7 +190,7 @@ namespace TaikoFlip
         {
             NoteObject noteObject = Instantiate(_notePrefab, _noteContainer).GetComponent<NoteObject>();
             noteObject.transform.localPosition = _spawnPosition;
-            noteObject.SetNote(note);
+            noteObject.SetNote(note, this);
             
             return noteObject;
         }

@@ -14,6 +14,7 @@ public class NoteObject : MonoBehaviour
     [SerializeField] private AudioClip[] _hitSounds;
     private Transform _transform;
     private CanvasGroup _canvasGroup;
+    private PlayerObject _player;
     
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class NoteObject : MonoBehaviour
             Miss();
     }
 
-    public void SetNote(TaikoNote newNote)
+    public void SetNote(TaikoNote newNote, PlayerObject player)
     {
         Note = newNote;
         _background.color = Note.Type switch
@@ -44,6 +45,7 @@ public class NoteObject : MonoBehaviour
             NoteType.Ka => KaColor,
             _ => _background.color,
         };
+        _player = player;
     }
 
     public int Hit()
@@ -61,6 +63,7 @@ public class NoteObject : MonoBehaviour
     
     public void Miss()
     {
+        _player.Combo = 0;
         Destroy(gameObject);
     }
 }
