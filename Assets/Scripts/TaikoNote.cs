@@ -11,7 +11,7 @@ namespace TaikoFlip
         public TaikoNote(string line)
         {
             string[] parts = line.Split(',');
-            Time = int.Parse(parts[0]);
+            Time = int.Parse(parts[2]);
             
             // Parse sounds
             HitSounds = new List<HitSound>();
