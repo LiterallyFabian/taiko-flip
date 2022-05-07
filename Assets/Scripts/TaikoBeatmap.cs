@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace TaikoFlip
@@ -73,6 +74,9 @@ namespace TaikoFlip
                     case "[Colours]\r":
                         currentSection = BeatmapSection.Colours;
                         continue;
+                    case "[Events]\r":
+                        currentSection = BeatmapSection.Events;
+                        continue;
                 }
 
                 switch (currentSection)
@@ -80,7 +84,6 @@ namespace TaikoFlip
                     case BeatmapSection.General when line.StartsWith("AudioFilename"):
                         // file name without extension and \r
                         string fileName = line.Substring(line.IndexOf(':') + 1).Replace(".mp3\r", "").Trim();
-                        Debug.Log(dirPath+ fileName);
                         beatmap.Music = Resources.Load<AudioClip>(dirPath + fileName);
                         break;
                     case BeatmapSection.General when line.StartsWith("AudioLeadIn"):
@@ -116,6 +119,15 @@ namespace TaikoFlip
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Tags"):
                         beatmap.Tags = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
+                        break;
+                    case BeatmapSection.Events:
+                        if (line.StartsWith("0,0,"))
+                        {
+                            string backgroundName = line.Substring(line.IndexOf('"') + 1, line.LastIndexOf('"') - line.IndexOf('"') - 1);
+                            backgroundName = backgroundName.Substring(0, backgroundName.LastIndexOf('.'));
+                            beatmap.Background = Resources.Load<Sprite>(dirPath + backgroundName);
+                        }
+
                         break;
                     case BeatmapSection.TimingPoints:
                         if (line.Length > 5)
