@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7aef43a18ef1d4ab5345c367a8d308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _background: {fileID: 83919981448744448}
   DonColor: {r: 1, g: 0.53333336, b: 0.7372549, a: 1}
   KaColor: {r: 0.53333336, g: 1, b: 0.77773994, a: 1}
 --- !u!1 &83919981448744454

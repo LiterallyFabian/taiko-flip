@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace TaikoFlip
 {
+    [Serializable]
     public class TaikoBeatmap
     {
         public static NumberFormatInfo NumberFormatInfo;
@@ -51,9 +52,11 @@ namespace TaikoFlip
             
             TaikoBeatmap beatmap = new TaikoBeatmap();
             string[] lines = textAsset.text.Split('\n');
-            string dirPath = path.Substring(0, path.LastIndexOf('\\') + 1);
             
-            
+            string dirPath = path.Substring(0, path.LastIndexOf('/') + 1);
+            if (dirPath.LastIndexOf('\\') > 0)
+                dirPath = path.Substring(0, path.LastIndexOf('\\') + 1);
+
             BeatmapSection currentSection = BeatmapSection.None;
             foreach (string line in lines)
             {
@@ -160,6 +163,11 @@ namespace TaikoFlip
             }
             
             return beatmap;
+        }
+
+        public override string ToString()
+        {
+            return $"{Artist} - {Title} [{Version}]. {Objects.Count} objects, {TimingPoints.Count} timing points";
         }
     }
 
