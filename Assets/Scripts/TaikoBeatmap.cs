@@ -122,13 +122,13 @@ namespace TaikoFlip
 
                         switch (type)
                         {
-                            case 0:
+                            case 1:
                                 Objects.Add(new TaikoNote(line));
                                 break;
-                            case 1:
+                            case 6:
                                 //Objects.Add(new TaikoSlider(line));
                                 break;
-                            case 3:
+                            case 12:
                                 //Objects.Add(new TaikoSpinner(line));
                                 break;
                         }
