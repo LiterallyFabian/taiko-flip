@@ -53,6 +53,11 @@ MonoBehaviour:
   _background: {fileID: 83919981448744448}
   DonColor: {r: 1, g: 0.53333336, b: 0.7372549, a: 1}
   KaColor: {r: 0.53333336, g: 1, b: 0.77773994, a: 1}
+  _hitSounds:
+  - {fileID: 8300000, guid: 3ad51f3483fc0944c9a2145efe8a5f67, type: 3}
+  - {fileID: 8300000, guid: cefe1cb05c414cb48be406e9da386046, type: 3}
+  - {fileID: 8300000, guid: 1f7892b240783a341851d8c06dae2d77, type: 3}
+  - {fileID: 8300000, guid: 74eb0c811201d2249b0462067b7622ea, type: 3}
 --- !u!1 &83919981448744454
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ namespace TaikoFlip
             }
 
             Beatmap =
-                TaikoBeatmap.Parse("Beatmaps/879516 Koga Tomoe (CV_ Touyama Nao) - Fukashigi no Carte (TV Size) [no video]/Koga Tomoe (CV Touyama Nao) - Fukashigi no Carte (TV Size) (zhu) [- Fapu's Oni -]");
+                TaikoBeatmap.Parse("Beatmaps/932283 Fujiwara Chika - Chikatto Chika Chika/Fujiwara Chika (CV Kohara Konomi) - Chikatto Chika Chika (TV Size) (zhu) [Nardo's Inner Oni]");
             
             print($"Playing {Beatmap}");
             StartCoroutine(StartBeatmap(Beatmap));

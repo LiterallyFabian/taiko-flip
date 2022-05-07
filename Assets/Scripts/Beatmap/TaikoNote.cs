@@ -17,23 +17,15 @@ namespace TaikoFlip
             HitSounds = new List<HitSound>();
             int sound = int.Parse(parts[4]);
 
-            if ((sound & 1) == 1)
-            {
-                HitSounds.Add(HitSound.Whistle);
-            }
-            if ((sound & 2) == 2)
-            {
-                HitSounds.Add(HitSound.Finish);
-            }
-            if ((sound & 3) == 3)
-            {
+            if (sound == 8 || sound == 10 || sound == 12 || sound == 14)
                 HitSounds.Add(HitSound.Clap);
-            }
+            if (sound == 4 || sound == 6 || sound == 12 || sound == 14)
+                HitSounds.Add(HitSound.Finish);
+            if (sound == 2 || sound == 6 || sound == 10 || sound == 14)
+                HitSounds.Add(HitSound.Whistle);
             if (HitSounds.Count == 0)
-            {
                 HitSounds.Add(HitSound.Normal);
-            }
-            
+
             if (HitSounds.Contains(HitSound.Whistle) || HitSounds.Contains(HitSound.Clap))
             {
                 Type = NoteType.Ka;
