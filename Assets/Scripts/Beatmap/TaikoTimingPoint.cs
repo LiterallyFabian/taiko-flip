@@ -23,7 +23,7 @@ namespace TaikoFlip
         {
             string[] parts = line.Split(',');
             
-            Time = int.Parse(parts[0]);
+            Time = int.Parse(parts[0].Split('.')[0]);
             BeatLength = float.Parse(parts[1], TaikoBeatmap.NumberFormatInfo);
             Meter = int.Parse(parts[2]);
             SampleSet = (SampleSet)int.Parse(parts[3]);

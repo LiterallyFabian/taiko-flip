@@ -46,6 +46,8 @@ namespace TaikoFlip
         
         public static TaikoBeatmap Parse(string path)
         {
+            path = path.Replace("Assets/Resources/", "").Replace(".osu", "");
+            
             TextAsset textAsset = Resources.Load<TextAsset>(path);
             if (textAsset == null)
                 throw new Exception($"Beatmap file not found: {path}");
@@ -105,10 +107,10 @@ namespace TaikoFlip
 
                         break;
                     }
-                    case BeatmapSection.Metadata when line.StartsWith("Title"):
+                    case BeatmapSection.Metadata when line.StartsWith("Title:"):
                         beatmap.Title = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
-                    case BeatmapSection.Metadata when line.StartsWith("Artist"):
+                    case BeatmapSection.Metadata when line.StartsWith("Artist:"):
                         beatmap.Artist = line.Substring(line.IndexOf(":", StringComparison.Ordinal) + 1).Trim();
                         break;
                     case BeatmapSection.Metadata when line.StartsWith("Creator"):

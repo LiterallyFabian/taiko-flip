@@ -42,7 +42,7 @@ namespace TaikoFlip
         private int _combo;
         private int _hits;
         private TaikoBeatmap _beatmap;
-        private int _hitsToFlipTheSwitch => (int)(_beatmap.Objects.Count * 0.8);
+        private int _hitsToFlipTheSwitch => _beatmap == null ? 10000 : (int)(_beatmap.Objects.Count * 0.8);
         private bool _switchFlipped = false;
         
 
@@ -93,7 +93,7 @@ namespace TaikoFlip
             _scoreText.text = _score.ToString();
             _comboText.text = _combo.ToString();
 
-            if (!_switchFlipped && _hits >= 10)
+            if (!_switchFlipped && _hits >= _hitsToFlipTheSwitch)
             {
                 _switchFlipped = true;
                 _power.color = Color.red;
