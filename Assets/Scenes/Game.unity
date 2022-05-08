@@ -920,7 +920,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1099.2681, y: 0}
+  m_SizeDelta: {x: 1267.7437, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &400722974
 MonoBehaviour:
@@ -939,7 +939,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 180}
@@ -2015,7 +2015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _rimLeft
-      value: 111
+      value: 117
       objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _rimRight
@@ -2023,11 +2023,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _centreLeft
-      value: 117
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 1279137934, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: _centreRight
-      value: 105
+      value: 111
       objectReference: {fileID: 0}
     - target: {fileID: 1817485091435809964, guid: 00bd5f2b86bae3e49bcacc3a89e0a718, type: 3}
       propertyPath: m_Pivot.x
@@ -3018,8 +3018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 10
+    m_Right: 10
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
