@@ -3496,10 +3496,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Each power cell you collect will count towards charging your switch. Make
+  m_Text: 'Each power cell you collect will count towards charging your switch. Make
     sure to gather enough power cells before the song is over, otherwise you may
     not get enough power! The first switch to be flipped wins. Oh yeah and if you
-    didn't catch it already, you might want audio for this one. Good luck!
+    didn''t catch it already, you might want audio for this one. Good luck!
+
+
+    The
+    songs are ordered from easiest to hardest.'
 --- !u!222 &2071477471
 CanvasRenderer:
   m_ObjectHideFlags: 0
