@@ -43,7 +43,6 @@ namespace TaikoFlip
 
         private TaikoBeatmap() {}
 
-        
         public static TaikoBeatmap Parse(string path)
         {
             path = path.Replace("Assets/Resources/", "").Replace(".osu", "");

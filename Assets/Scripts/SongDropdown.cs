@@ -21,7 +21,7 @@ namespace TaikoFlip
             {
                 _cleanPaths[i] = _paths[i].Replace("Assets/Resources/", "").Replace(".osu", "");
                 TaikoBeatmap beatmap = TaikoBeatmap.Parse(_cleanPaths[i]);
-                GameManager.Beatmaps.Add(beatmap);
+                //GameManager.Beatmaps.Add(beatmap);
                 options.Add(new Dropdown.OptionData(beatmap.Artist + " - " + beatmap.Title));
             }
 

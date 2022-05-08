@@ -38,12 +38,15 @@ namespace TaikoFlip
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _comboText;
         
-        private int _score;
+        public int Score;
         public int Combo;
+        public int MaxCombo;
         private int _hits;
         private TaikoBeatmap _beatmap;
         private int _hitsToFlipTheSwitch => _beatmap == null ? 10000 : (int)(_beatmap.Objects.Count * 0.8);
-        private bool _switchFlipped = false;
+        public string PlayerName; 
+
+        public bool SwitchFlipped = false;
         
 
         public void StartBeatmap(TaikoBeatmap beatmap)
@@ -119,12 +122,12 @@ namespace TaikoFlip
             }
 
             _power.fillAmount = Mathf.Clamp((float) _hits / _hitsToFlipTheSwitch, 0, 1);
-            _scoreText.text = _score.ToString();
+            _scoreText.text = Score.ToString();
             _comboText.text = Combo.ToString();
 
-            if (!_switchFlipped && _hits >= _hitsToFlipTheSwitch)
+            if (!SwitchFlipped && _hits >= _hitsToFlipTheSwitch)
             {
-                _switchFlipped = true;
+                SwitchFlipped = true;
                 _power.color = Color.red;
                 _animator.Play("flippedtheswitch");
                 _switchImage.sprite = _switchOn;
@@ -145,8 +148,9 @@ namespace TaikoFlip
             {
                 if (closestNote.Note.Type == NoteType.Don)
                 {
-                    _score += closestNote.Hit() + Combo / 10;
+                    Score += closestNote.Hit() + Combo / 10;
                     Combo++;
+                    MaxCombo = Mathf.Max(MaxCombo, Combo);
                     _hits++;
                 }
                 else
@@ -159,8 +163,9 @@ namespace TaikoFlip
             {
                 if (closestNote.Note.Type == NoteType.Ka)
                 {
-                    _score += closestNote.Hit() + Combo / 10;
+                    Score += closestNote.Hit() + Combo / 10;
                     Combo++;
+                    MaxCombo = Mathf.Max(MaxCombo, Combo);
                     _hits++;
                 }
                 else
