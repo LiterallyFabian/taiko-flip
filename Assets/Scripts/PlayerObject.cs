@@ -166,7 +166,7 @@ namespace TaikoFlip
             // Get the note with the lowest local position X
             NoteObject lastNote = null;
             float lastDistance = float.MaxValue;
-            foreach (NoteObject note in FindObjectsOfType<NoteObject>())
+            foreach (NoteObject note in GetComponentsInChildren<NoteObject>())
             {
                 float distance = note.transform.localPosition.x;
                 if (distance < lastDistance)

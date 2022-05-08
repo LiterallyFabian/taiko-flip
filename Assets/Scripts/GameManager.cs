@@ -57,7 +57,6 @@ namespace TaikoFlip
                 p.StartBeatmap(beatmap);
             }
             yield return new WaitForSecondsRealtime(NoteObject.TimeToReachHit);
-            print("h");
             _music.clip = beatmap.Music;
             _music.Play();
         }
