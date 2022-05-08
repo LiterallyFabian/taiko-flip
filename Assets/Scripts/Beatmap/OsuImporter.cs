@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor.AssetImporters;
-
+#endif
 namespace TaikoFlip
 {
+#if UNITY_EDITOR
     [ScriptedImporter(1, "osu")]
     public class OsuImporter : ScriptedImporter
     {
@@ -14,4 +16,5 @@ namespace TaikoFlip
             ctx.SetMainObject(subAsset);
         }
     }
+#endif
 }
