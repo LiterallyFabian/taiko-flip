@@ -87,6 +87,11 @@ namespace TaikoFlip
                 _drum.CentreR.enabled = Input.GetKey(_centreRight);
                 _drum.RimL.enabled = Input.GetKey(_rimLeft);
                 _drum.RimR.enabled = Input.GetKey(_rimRight);
+                
+                _drum.CentreLText.text = _centreLeft.ToString();
+                _drum.CentreRText.text = _centreRight.ToString();
+                _drum.RimLText.text = _rimLeft.ToString();
+                _drum.RimRText.text = _rimRight.ToString();
             }
             else
             {
@@ -102,10 +107,13 @@ namespace TaikoFlip
                     Slam(false);
                 }
                 
-                _drum.CentreL.enabled = Input.GetKey(_centre);
                 _drum.CentreR.enabled = Input.GetKey(_centre);
-                _drum.RimL.enabled = Input.GetKey(_rim);
                 _drum.RimR.enabled = Input.GetKey(_rim);
+
+                _drum.CentreLText.text = "";
+                _drum.CentreRText.text = _centre.ToString();
+                _drum.RimLText.text = "";
+                _drum.RimRText.text = _rim == KeyCode.RightBracket ? "Å" : _rim.ToString();
             }
 
             _power.fillAmount = Mathf.Clamp((float) _hits / _hitsToFlipTheSwitch, 0, 1);
