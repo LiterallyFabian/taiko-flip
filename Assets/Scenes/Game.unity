@@ -3498,7 +3498,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: Each power cell you collect will count towards charging your switch. Make
     sure to gather enough power cells before the song is over, otherwise you may
-    not get enough power! The first switch to be flipped wins.
+    not get enough power! The first switch to be flipped wins. Oh yeah and if you
+    didn't catch it already, you might want audio for this one. Good luck!
 --- !u!222 &2071477471
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3740,8 +3741,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 300
-    m_Right: 300
+    m_Left: 200
+    m_Right: 200
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
