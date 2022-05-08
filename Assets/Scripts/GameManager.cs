@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TaikoFlip
@@ -59,6 +60,11 @@ namespace TaikoFlip
             yield return new WaitForSecondsRealtime(NoteObject.TimeToReachHit);
             _music.clip = beatmap.Music;
             _music.Play();
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
