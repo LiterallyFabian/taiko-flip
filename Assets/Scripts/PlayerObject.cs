@@ -106,8 +106,10 @@ namespace TaikoFlip
                     AudioSource.PlayClipAtPoint(_hitRim, Vector3.zero);
                     Slam(false);
                 }
-                
+
+                _drum.CentreL.enabled = false;
                 _drum.CentreR.enabled = Input.GetKey(_centre);
+                _drum.RimL.enabled = false;
                 _drum.RimR.enabled = Input.GetKey(_rim);
 
                 _drum.CentreLText.text = "";
